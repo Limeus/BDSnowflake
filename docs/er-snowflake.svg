@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">ER diagram for snowflake sales model</title>
+  <desc id="desc">Snowflake schema with fact_sales in the center and dimension tables around it.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .fact { fill: #16324f; stroke: #0b1f35; stroke-width: 2; }
+      .dim { fill: #ffffff; stroke: #486581; stroke-width: 2; }
+      .subdim { fill: #eef6ff; stroke: #6b8fb3; stroke-width: 2; }
+      .stage { fill: #fff7e6; stroke: #b7791f; stroke-width: 2; }
+      .title { font: 700 28px Arial, sans-serif; fill: #102a43; }
+      .subtitle { font: 16px Arial, sans-serif; fill: #486581; }
+      .table-title-light { font: 700 17px Arial, sans-serif; fill: #ffffff; }
+      .table-title { font: 700 16px Arial, sans-serif; fill: #102a43; }
+      .field-light { font: 13px Arial, sans-serif; fill: #d9e2ec; }
+      .field { font: 13px Arial, sans-serif; fill: #334e68; }
+      .note { font: 14px Arial, sans-serif; fill: #486581; }
+      .line { fill: none; stroke: #829ab1; stroke-width: 2; }
+      .load { fill: none; stroke: #b7791f; stroke-width: 2.5; stroke-dasharray: 8 6; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#829ab1" />
+    </marker>
+    <marker id="arrowLoad" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#b7791f" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1400" height="900" />
+  <text class="title" x="48" y="48">BDSnowflake ER Diagram</text>
+  <text class="subtitle" x="48" y="76">CSV -> staging.mock_data -> dw.dim_* + dw.fact_sales</text>
+
+  <rect class="stage" x="48" y="118" width="250" height="118" rx="8" />
+  <text class="table-title" x="68" y="148">staging.mock_data</text>
+  <text class="field" x="68" y="174">raw_source_id PK</text>
+  <text class="field" x="68" y="196">CSV source columns</text>
+  <text class="field" x="68" y="218">10 files x 1000 rows</text>
+
+  <rect class="fact" x="550" y="338" width="300" height="230" rx="8" />
+  <text class="table-title-light" x="575" y="370">dw.fact_sales</text>
+  <text class="field-light" x="575" y="398">sale_key PK</text>
+  <text class="field-light" x="575" y="420">date_key FK</text>
+  <text class="field-light" x="575" y="442">customer_key FK</text>
+  <text class="field-light" x="575" y="464">seller_key FK</text>
+  <text class="field-light" x="575" y="486">product_key FK</text>
+  <text class="field-light" x="575" y="508">store_key FK</text>
+  <text class="field-light" x="575" y="530">supplier_key FK</text>
+  <text class="field-light" x="575" y="552">sale_quantity, sale_total_price</text>
+
+  <rect class="dim" x="96" y="310" width="250" height="136" rx="8" />
+  <text class="table-title" x="116" y="340">dw.dim_customer</text>
+  <text class="field" x="116" y="366">customer_key PK</text>
+  <text class="field" x="116" y="388">location_key FK</text>
+  <text class="field" x="116" y="410">pet_key FK</text>
+  <text class="field" x="116" y="432">name, age, email</text>
+
+  <rect class="dim" x="96" y="522" width="250" height="118" rx="8" />
+  <text class="table-title" x="116" y="552">dw.dim_seller</text>
+  <text class="field" x="116" y="578">seller_key PK</text>
+  <text class="field" x="116" y="600">location_key FK</text>
+  <text class="field" x="116" y="622">name, email</text>
+
+  <rect class="dim" x="1054" y="132" width="250" height="118" rx="8" />
+  <text class="table-title" x="1074" y="162">dw.dim_store</text>
+  <text class="field" x="1074" y="188">store_key PK</text>
+  <text class="field" x="1074" y="210">location_key FK</text>
+  <text class="field" x="1074" y="232">store_name, phone, email</text>
+
+  <rect class="dim" x="1054" y="310" width="250" height="130" rx="8" />
+  <text class="table-title" x="1074" y="340">dw.dim_product</text>
+  <text class="field" x="1074" y="366">product_key PK</text>
+  <text class="field" x="1074" y="388">category_key FK</text>
+  <text class="field" x="1074" y="410">attribute_key FK</text>
+  <text class="field" x="1074" y="432">price, rating, dates</text>
+
+  <rect class="dim" x="1054" y="522" width="250" height="130" rx="8" />
+  <text class="table-title" x="1074" y="552">dw.dim_supplier</text>
+  <text class="field" x="1074" y="578">supplier_key PK</text>
+  <text class="field" x="1074" y="600">location_key FK</text>
+  <text class="field" x="1074" y="622">name, contact, email</text>
+  <text class="field" x="1074" y="644">phone</text>
+
+  <rect class="dim" x="575" y="112" width="250" height="118" rx="8" />
+  <text class="table-title" x="595" y="142">dw.dim_date</text>
+  <text class="field" x="595" y="168">date_key PK</text>
+  <text class="field" x="595" y="190">full_date</text>
+  <text class="field" x="595" y="212">day, month, quarter, year</text>
+
+  <rect class="subdim" x="96" y="710" width="250" height="118" rx="8" />
+  <text class="table-title" x="116" y="740">dw.dim_pet</text>
+  <text class="field" x="116" y="766">pet_key PK</text>
+  <text class="field" x="116" y="788">type, name, breed</text>
+  <text class="field" x="116" y="810">pet_category</text>
+
+  <rect class="subdim" x="575" y="710" width="250" height="118" rx="8" />
+  <text class="table-title" x="595" y="740">dw.dim_geo_location</text>
+  <text class="field" x="595" y="766">location_key PK</text>
+  <text class="field" x="595" y="788">country_key FK</text>
+  <text class="field" x="595" y="810">state, city, address, postal</text>
+
+  <rect class="subdim" x="575" y="610" width="250" height="68" rx="8" />
+  <text class="table-title" x="595" y="640">dw.dim_country</text>
+  <text class="field" x="595" y="662">country_key PK, country_name</text>
+
+  <rect class="subdim" x="1054" y="710" width="250" height="84" rx="8" />
+  <text class="table-title" x="1074" y="740">dw.dim_product_category</text>
+  <text class="field" x="1074" y="766">category_key PK</text>
+  <text class="field" x="1074" y="788">category_name</text>
+
+  <rect class="subdim" x="1054" y="800" width="250" height="84" rx="8" />
+  <text class="table-title" x="1074" y="830">dw.dim_product_attribute</text>
+  <text class="field" x="1074" y="856">attribute_key PK</text>
+  <text class="field" x="1074" y="878">brand, color, size, material</text>
+
+  <path class="load" d="M298 177 C408 177 450 420 550 420" marker-end="url(#arrowLoad)" />
+
+  <path class="line" d="M550 432 C468 410 430 378 346 378" marker-end="url(#arrow)" />
+  <path class="line" d="M550 486 C468 520 430 581 346 581" marker-end="url(#arrow)" />
+  <path class="line" d="M700 338 L700 230" marker-end="url(#arrow)" />
+  <path class="line" d="M850 442 C940 420 984 375 1054 375" marker-end="url(#arrow)" />
+  <path class="line" d="M850 508 C940 456 984 191 1054 191" marker-end="url(#arrow)" />
+  <path class="line" d="M850 530 C940 552 984 587 1054 587" marker-end="url(#arrow)" />
+
+  <path class="line" d="M221 446 L221 710" marker-end="url(#arrow)" />
+  <path class="line" d="M346 388 C430 480 510 748 575 748" marker-end="url(#arrow)" />
+  <path class="line" d="M346 600 C438 640 500 764 575 764" marker-end="url(#arrow)" />
+  <path class="line" d="M1054 210 C950 320 878 740 825 748" marker-end="url(#arrow)" />
+  <path class="line" d="M1054 600 C950 660 878 780 825 780" marker-end="url(#arrow)" />
+  <path class="line" d="M700 710 L700 678" marker-end="url(#arrow)" />
+
+  <path class="line" d="M1179 440 L1179 710" marker-end="url(#arrow)" />
+  <path class="line" d="M1205 440 L1205 800" marker-end="url(#arrow)" />
+
+  <text class="note" x="48" y="872">Fact table stores sale events. Dimension tables describe customers, sellers, products, stores, suppliers, dates and normalized geography.</text>
+  <path class="line" d="M980 868 L1030 868" marker-end="url(#arrow)" />
+  <text class="note" x="1040" y="872">FK relationship</text>
+  <path class="load" d="M1175 868 L1225 868" marker-end="url(#arrowLoad)" />
+  <text class="note" x="1235" y="872">ETL/source load</text>
+</svg>
